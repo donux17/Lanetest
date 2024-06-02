@@ -1,5 +1,5 @@
 #include <opencv2/highgui/highgui.hpp>
-#include<iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <opencv2/opencv.hpp>
@@ -20,13 +20,14 @@ private:
 	double poly_top_width = 0.07;     //사다리꼴 위쪽 가장자리 너비 계산을 위한 백분율
 	double poly_height = 0.4;         //사다리꼴 높이 계산을 위한 백분율
 
-
 public:
 	Mat filter_colors(Mat img_frame);
 	Mat limit_region(Mat img_edges);
 	vector<Vec4i> houghLines(Mat img_mask);
 	vector<vector<Vec4i> > separateLine(Mat img_edges, vector<Vec4i> lines);
 	vector<Point> regression(vector<vector<Vec4i> > separated_lines, Mat img_input);
-	string predictDir();
 	Mat drawLine(Mat img_input, vector<Point> lane, string dir);
+	vector<Point> calculateROI(Mat img_edges); // 추가된 함수
+	Mat img_input;
+	bool isLaneDeparture(vector<Point> lane, int frameWidth); // 추가
 };
